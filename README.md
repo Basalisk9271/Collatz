@@ -3,9 +3,6 @@
 ## Description
 Write a program in different languages (Fortran, Julia, Go, Lisp, and Rust) that takes an command line integer arguments for a range of numbers. Then, the program will calculate the sequences of the numbers in accordance with the Collatz Conjecture before storing the top ten numbers in descending order by the amount of values in their sequence. Then, they'll be sorted by the value of each starting number. These two sorts will be output onto the screen so the user can see them. 
 
-## Algorithm
-This project's programs all share a common structure that includes having all of the program fuinctionality in the main function instead of multiple functions. The way that this works is that the program will ask the user for the size of the roomm and if they want a partition. Then the program creates two 3D arrays for the cube and partition that are the same side. The partition cube will hold the partition wall coordinates to ensure the cube does not diffuse into that area of the cube, but instead has to go around that portion of the cube. The program will loop and run until the whole cube finishes diffusing, at which point the program will display the estimated simulated equilibration time in seconds. 
-
 ## Authors and Acknowledgment
 Gabe Imlay
 
