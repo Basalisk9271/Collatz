@@ -39,7 +39,7 @@ func main () {
     var collatzArray[10] KVPair
     for i = 0; i < 10; i++ { //initialize the array of structures
         collatzArray[i].key = 0
-        collatzArray[i].key = 0
+        collatzArray[i].sequence = 0
     }
     
     for i = num1; i < num2+1; i++ {
