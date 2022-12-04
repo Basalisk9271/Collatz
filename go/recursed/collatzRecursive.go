@@ -10,11 +10,12 @@ import "fmt"
 import "os"
 import "strconv"
 
+// Most of the following code looks very similar to my HappyNums project because the code is based off of that other project
 
 type KVPair struct {
     key int64
     sequence int64 
-}//define a struct to hold the happyNums and norms
+}
 
 func main () {
     var i int64;
