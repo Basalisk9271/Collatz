@@ -1,3 +1,5 @@
+#!/usr/bin/sbcl --script
+
 ; Gabe Imlay
 ; CSC330: Organization of Programming Languages
 ; Project 3: Collatz -> Julia -> Iterative
@@ -5,111 +7,130 @@
 
 ; Most of the following code looks very similar to my HappyNums project because the code is based off of that other project
 
-(defvar happyNums)
-(defvar norms)
+; I did not use structs in this language because it seemed simpler to use two global arrays for the functions while 
+; just performing the same operations on both of the arrays when I would sort them
 
-(defun isHappy ( param )
-  (let (number temp digit sum runningTotalForNorm norm)
+(defvar keyArr)
+(defvar seqArr)
+
+(defun collatzSeq ( param )
+  (let (number seq)
   (setq number param)
-  (setq runningTotalForNorm 1)
+  (setq seq 0)
   (loop while (/= number 1)
     do
-      (setq sum 0)
-      (setq temp number)
-      (setq temp (* temp temp))
-      (setq runningtotalfornorm (+ runningtotalfornorm temp))
-      (loop while (/= number 0 )
-        do 
-          (setq digit (mod number 10))
-          (setq sum (+ sum (* digit digit)))
-          (setq number (floor number 10))
+      (if (= (mod number 2) 0)
+        (progn
+        (setq number (/ number 2))
+        )
+        (progn
+          (setq number (+ (* number 3) 1))
+        )
       )
-      (setq number (+ number sum))
-      ; Josh gave me this idea to use 4 as a condition for breaking the loop
-      ; Every time a number gets to 4, it goes into the same spiral of not being a happy number
-      (if (= number 4)
-        (return-from isHappy -1)
-      )  
+      (setq seq (+ seq 1)) 
   )
-  (setq norm (sqrt runningtotalfornorm))
-  norm
+  seq
   )
 )
 
-; This is a buble sort that I found on https://blog.krybot.com/a?ID=01550-cc1fd9c5-8d8b-4a91-b703-69c2a2434561
-; and modified to suit my needs.
-(defun bubbleSort ()
-  (dotimes(i(1-(length norms)) norms)
-    (dotimes(j(-(length norms) i 1))
-      (if(<(aref norms j)(aref norms(+ 1 j)))
+(defun bubbleSort (sortBy)
+  (if (= sortBy 1)
+  (dotimes(i(1-(length seqArr)) seqArr)
+    (dotimes(j(-(length seqArr) i 1))
+      (if(<(aref seqArr j)(aref seqArr(+ 1 j)))
         (progn
-        (rotatef (aref happyNums j)(aref happyNums(+ 1 J)))
-        (rotatef (aref norms j)(aref norms(+ 1 J))))))))
+        (rotatef (aref keyArr j)(aref keyArr(+ 1 J)))
+        (rotatef (aref seqArr j)(aref seqArr(+ 1 J))))))))
+  (if (= sortBy 2)
+  (dotimes(i(1-(length keyArr)) keyArr)
+    (dotimes(j(-(length keyArr) i 1))
+      (if(<(aref keyArr j)(aref keyArr(+ 1 j)))
+        (progn
+        (rotatef (aref keyArr j)(aref keyArr(+ 1 J)))
+        (rotatef (aref seqArr j)(aref seqArr(+ 1 J))))))))
+)
 
+(defun linearSearch (search)
+  (let (searched)
+  (setq searched 0)
+  (dotimes(i(1-(length seqArr)) seqArr)
+    (if (= (aref seqarr i) search)
+      (setq searched 1)
+    )
+  )
+  searched
+  )
+  )
 
-;;; Here is the main program
+; Here is the main program
 (progn
-  (defvar num1)
-  (defvar num2)
-  (defvar newpair)
-  (defvar newpair2)
-  
-  ; Set the array sizes so that they have memory
-  (setf happyNums (make-array '(10)))
-  (setf norms (make-array '(10)))
+  (defvar lowerBound)
+  (defvar upperBound)
+  (defvar seq)
 
-  (princ "Enter the first number: ") (finish-output)
-  (setf num1 (read))
-  (princ "Enter the second number: ") (finish-output)
-  (setf num2 (read))
-  (if (> num1 num2)
-    (rotatef num1 num2)
+  (setf keyArr (make-array '(10)))
+  (setf seqArr (make-array '(10)))
+  
+  (setf lowerbound (parse-integer (nth 1 *posix-argv*)))
+  (setf upperbound (parse-integer (nth 2 *posix-argv*)))
+
+  (if (> lowerBound upperBound)
+    (rotatef lowerBound upperBound)
   ) 
   
   ; If number 1 is 0, skip to 1 so it does not break the program logic
-  (if (= num1 0)
-    (setq num1 (+ num1 1))
+  (if (= lowerBound 0)
+    (setq lowerBound (+ lowerBound 1))
   ) 
 
   ; Initializes my arrays with zeros in them 
   (loop for x from 0 to 9
     do
-      (setf (aref happyNums x) 0)
-      (setf (aref norms x) 0)
+      (setf (aref keyArr x) 0)
+      (setf (aref seqArr x) 0)
   )
 
- 
-
-; This is a loop to go through all of the numbers between te input values and check to see if there are happy numbers present
-  (loop for x from num1 to num2
+  (loop for x from lowerBound to upperBound
     do
-      (if (/= (isHappy x) -1)
+      (setq seq (collatzseq x))
+      (if (/= (linearsearch seq) 1)
         (progn
           
-          (if (> (isHappy x) (aref norms 9))
+          (if (> seq (aref seqArr 9))
           (progn
-            (setf (aref happyNums 9) x)
-            (setf (aref norms 9) (isHappy x))
-            
+            (setf (aref keyArr 9) x)
+            (setf (aref seqArr 9) seq)
           )
           )
-          (bubbleSort ))
+          ; sort the arrays by the sequence number values
+          (bubbleSort 1))
       )
   )
-  
-  ; Next is the loops to print my happyNums or display "NOBODYS HAPPY!" if there are no happy numbers
-  (if (= (aref happyNums 0) 0)
-  (progn
-          (princ "NOBODYS HAPPY!")
-          (terpri))
-  (progn
-    (loop for x from 0 to 9
+
+  (princ "Sorted based on sequence length: ")
+  (terpri)
+  (loop for x from 0 to 9
       do
-        (if(/= (aref happyNums x) 0)
+        (if(/= (aref keyArr x) 0)
           (progn
-          (princ (aref happynums x))
-          (terpri)))) 
-        ))
+          (princ (aref keyarr x))
+          (princ "        ")
+          (princ (aref seqarr x))
+          (terpri))))
+
+  ; sort the arrays based on the integer values
+  (bubblesort 2)
+
+  (princ "Sorted based on integer size: ")
+  (terpri)
+  (loop for x from 0 to 9
+      do
+        (if(/= (aref keyArr x) 0)
+          (progn
+          (princ (aref keyarr x))
+          (princ "        ")
+          (princ (aref seqarr x))
+          (terpri))))
         
 
   )
