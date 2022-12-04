@@ -5,6 +5,8 @@
 # Project 3: Collatz -> Julia -> Iterative
 # December 4th, 2022
 
+# Most of the following code looks very similar to my HappyNums project because the code is based off of that other project
+
 mutable struct KVPair
     key::Int64
     sequence::Int64
