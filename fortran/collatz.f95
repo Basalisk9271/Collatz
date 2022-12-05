@@ -21,12 +21,9 @@ PROGRAM Collatz
 
     call get_command_argument(1,LB)
     call get_command_argument(2,UB)
-
-    !write(*,"(A)",advance="no") "First Argument: "
+    
     read (LB,*) lowerBound
     read (UB,*) upperBound
-    !write(*,"(A)",advance="no") "Second Argument: "
-    !read *,upperBound
 
     if ( lowerBound > upperBound ) then
         temp = upperBound
