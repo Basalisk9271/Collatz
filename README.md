@@ -19,7 +19,7 @@ This project contains folders named for the language that they hold in them. The
 Gabe Imlay
 
 ## Project status
- -- In Progress -- 
+ -- Complete -- 
 
 ## Langauges 
 
@@ -32,7 +32,7 @@ Gabe Imlay
 
 Iterative Version:
 ```
-gfortran -O2 collatz.f95 -o collatz
+gfortran collatz.f95 -o collatz
 ```
 To execute, run:
 ```
@@ -41,7 +41,7 @@ To execute, run:
 
 Recursive Version:
 ```
-gfortran -O2 collatzRecursive.f95 -o collatzR
+gfortran collatzRecursive.f95 -o collatzR
 ```
 To execute, run:
 ```
@@ -96,7 +96,7 @@ Recursive Version: You'll need to make the file executable if it is not already 
 
 Iterative Version:
 ```
-rustc -O collatz.rs
+rustc collatz.rs
 ```
 To execute, run:
 ```
@@ -105,7 +105,7 @@ To execute, run:
 
 Recursive Version:
 ```
-rustc -O collatzRecursive.rs
+rustc collatzRecursive.rs
 ```
 To execute, run:
 ```
