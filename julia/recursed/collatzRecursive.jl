@@ -12,6 +12,7 @@ mutable struct KVPair
     sequence::Int64
 end
 
+# main function to run the majority of the program's algorithm
 function main()
     num1 = parse(Int64,ARGS[1])
     num2 = parse(Int64,ARGS[2])
@@ -58,6 +59,7 @@ function main()
     end
 end 
 
+# determines the sequrnce value for a given number
 function collatzSeq(param)
     sequence = 0
     number = param
@@ -73,7 +75,7 @@ function collatzSeq(param)
     end
     return sequence
 end
-
+# bubble sorts the arrays in descending order based on the key values or the sequence values
 function bubbleSort(collatzArr, sortBy)
     if sortBy == "v"
         for i = 1: length(collatzArr)
@@ -95,6 +97,7 @@ function bubbleSort(collatzArr, sortBy)
     end
 end
 
+# linear search to find whether a sequence value is already in the array
 function linearSearch(array, search)
     searched = -1
 
