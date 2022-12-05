@@ -17,6 +17,7 @@ type KVPair struct {
     sequence int64 
 }
 
+// main function to run the majority of the program's algorithm
 func main () {
     var i int64;
     var sequence int64;
@@ -77,6 +78,7 @@ func main () {
     
 }
 
+// determines the sequrnce value for a given number
 func collatzSeq(param int64) int64 {
     var number int64;
     var sequence int64;
@@ -95,6 +97,7 @@ func collatzSeq(param int64) int64 {
 
 }
 
+// bubble sorts the arrays in descending order based on the key values or the sequence values
 //Bubble sort from https://www.tutorialspoint.com/bubble-sort-in-go-lang to sort my array of structs
 func BubbleSort(array[10] KVPair, sortBy string)[10]KVPair {
     if (sortBy == "v"){
@@ -119,6 +122,7 @@ func BubbleSort(array[10] KVPair, sortBy string)[10]KVPair {
     return array
  }
  
+ // linear search to find whether a sequence value is already in the array
  func linearSearch(array[10] KVPair, search int64) int32 {
     var searched int32
 	searched = -1
