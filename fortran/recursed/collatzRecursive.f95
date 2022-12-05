@@ -5,6 +5,7 @@
 
 !Most of the following code looks very similar to my HappyNums project because the code is based off of that other project
 
+!main function to run the majority of the program's algorithm
 PROGRAM Collatz
     IMPLICIT NONE
     
@@ -78,6 +79,7 @@ PROGRAM Collatz
 
     contains
     
+    !determines the sequrnce value for a given number
     recursive integer (kind = 8) function collatzSeq(param) result (sequence)
         IMPLICIT NONE
         integer :: number, param
@@ -97,6 +99,7 @@ PROGRAM Collatz
         end if
     end function collatzSeq
 
+    !bubble sorts the arrays in descending order based on the key values or the sequence values
     !This bubble sort is one found on Rosetta Code and tweaked to bubble sort my array of structs
     !found here https://rosettacode.org/wiki/Sorting_algorithms/Bubble_sort#Fortran
     SUBROUTINE Bubble_Sort(sortBy, a)
@@ -135,6 +138,7 @@ PROGRAM Collatz
         end if
       END SUBROUTINE
 
+      !linear search to find whether a sequence value is already in the array
       integer function linearSearch(a, search)
         type(KVPair), DIMENSION(:) :: a
         INTEGER :: i, j, searched
