@@ -5,6 +5,7 @@
 
 use std::env;
 
+// main function to run the majority of the program's algorithm
 fn main () {
     let args: Vec<String> = env::args().collect();
     let num = &args[1];
@@ -47,6 +48,7 @@ fn main () {
     }
 }
 
+// determines the sequrnce value for a given number
 fn collatz_seq(param: i64)-> i64{
     let mut _sequence = 0;
     let mut number = param;
@@ -63,13 +65,12 @@ fn collatz_seq(param: i64)-> i64{
     return _sequence;
 }
 
+// bubble sorts the arrays in descending order based on the key values or the sequence values
 fn bubble_sort(key_arr: &mut [i64;10], seq_arr: &mut [i64;10], sort_by: &str){
     if sort_by.trim() == "v" {
         for i in 1..10 {
             for j in 1..(10 - i) {
                 if seq_arr[j] < seq_arr[j+1]{
-                    // let mut seq_arr[j], seq_arr[j+1] = seq_arr[j+1], seq_arr[j];
-                    // let mut key_arr[j], key_arr[j+1] = key_arr[j+1], key_arr[j];
                     seq_arr.swap(j, j+1);
                     key_arr.swap(j, j+1);
                 }
@@ -80,8 +81,6 @@ fn bubble_sort(key_arr: &mut [i64;10], seq_arr: &mut [i64;10], sort_by: &str){
         for i in 1..10 {
             for j in 1..(10 - i) {
                 if key_arr[j] < key_arr[j+1]{
-                    // let seq_arr[j], seq_arr[j+1] = seq_arr[j+1], seq_arr[j];
-                    // let key_arr[j], key_arr[j+1] = key_arr[j+1], key_arr[j];
                     seq_arr.swap(j, j+1);
                     key_arr.swap(j, j+1);
                 }
@@ -90,6 +89,7 @@ fn bubble_sort(key_arr: &mut [i64;10], seq_arr: &mut [i64;10], sort_by: &str){
     }
 }
 
+// linear search to find whether a sequence value is already in the array
 fn linear_search(array: [i64;10], search: i64 )-> i32{
     let mut searched = -1;
     for i in 1..10 {
