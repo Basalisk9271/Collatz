@@ -13,6 +13,7 @@
 (defvar keyArr)
 (defvar seqArr)
 
+; determines the sequrnce value for a given number
 (defun collatzSeq ( param )
   (let (number seq)
   (setq number param)
@@ -34,6 +35,7 @@
 )
 )
 
+; bubble sorts the arrays in descending order based on the key values or the sequence values
 (defun bubbleSort (sortBy)
   (if (= sortBy 1)
   (dotimes(i(1-(length seqArr)) seqArr)
@@ -51,6 +53,7 @@
         (rotatef (aref seqArr j)(aref seqArr(+ 1 J))))))))
 )
 
+; linear search to find whether a sequence value is already in the array
 (defun linearSearch (search)
   (let (searched)
   (setq searched 0)
@@ -63,7 +66,7 @@
   )
   )
 
-; Here is the main program
+; main function to run the majority of the program's algorithm
 (progn
   (defvar lowerBound)
   (defvar upperBound)
